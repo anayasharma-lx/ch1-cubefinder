@@ -5,300 +5,439 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Successive Differences — Ganita Prakash Grade 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#d8d4cc;
-  --text:#1a1814;--text2:#5a5650;--text3:#9a958e;
-  --blue:#2c5f9e;--red:#c0392b;--green:#1a7a4a;--orange:#e08020;
-  --purple:#7a5cb0;
-  --font:'DM Sans',-apple-system,sans-serif;
-  --mono:'DM Mono',ui-monospace,monospace;
+  --paper:  #faf8f4;
+  --paper2: #f3f0ea;
+  --paper3: #e8e3d8;
+  --ink:    #1c1a16;
+  --ink2:   #4a4640;
+  --ink3:   #8a8580;
+  --rule:   #d4cfc5;
+
+  --teal:   #1d6a72;
+  --teal2:  #2a8a94;
+  --teal-bg:#e8f4f5;
+  --rust:   #b84a2a;
+  --rust2:  #d45c36;
+  --rust-bg:#fdf0ec;
+  --gold:   #c08030;
+  --gold-bg:#fdf5e8;
+  --sage:   #3a6a48;
+  --sage-bg:#eaf2ec;
+  --violet: #6a4a90;
+
+  --font:  'DM Sans', sans-serif;
+  --serif: 'Lora', Georgia, serif;
+  --mono:  'DM Mono', ui-monospace, monospace;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(28,26,22,.08);
 }
-body{font-family:var(--font);background:var(--bg);color:var(--text);
-  min-height:100vh;-webkit-font-smoothing:antialiased;padding:24px 16px;line-height:1.5}
-.app{max-width:960px;margin:0 auto}
 
-.head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-.head-ic{width:42px;height:42px;border-radius:10px;background:var(--surface2);
-  border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-weight:600;color:var(--text2);font-size:16px;flex-shrink:0}
-.lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:2px}
-.title{font-size:22px;font-weight:700;line-height:1.2}
+body{
+  font-family:var(--font);
+  background:var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  padding:32px 20px 60px;
+  line-height:1.6;
+  background-image:
+    radial-gradient(circle at 20% 30%,rgba(192,128,48,.04) 0,transparent 50%),
+    radial-gradient(circle at 80% 70%,rgba(29,106,114,.04) 0,transparent 50%);
+}
+.app{max-width:900px;margin:0 auto}
 
-.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
+/* ── HEADER ─────────────────────────────────────────── */
+.header{margin-bottom:28px;border-bottom:1.5px solid var(--rule);padding-bottom:20px}
+.chapter-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--paper2);border:1.5px solid var(--rule);
+  border-radius:20px;padding:4px 14px 4px 10px;
+  font-size:11px;font-weight:600;letter-spacing:.6px;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:12px
+}
+.badge-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--teal);color:#fff;
+  font-size:12px;font-weight:700;font-family:var(--mono);
+  display:flex;align-items:center;justify-content:center
+}
+h1{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-.3px;line-height:1.2}
+.header-sub{font-size:14px;color:var(--ink2);margin-top:6px;max-width:540px;line-height:1.55}
 
-/* Two-column layout */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-@media(max-width:680px){.two-col{grid-template-columns:1fr}}
+/* ── CARD ────────────────────────────────────────────── */
+.card{
+  background:var(--paper);border:1.5px solid var(--rule);
+  border-radius:14px;padding:24px;margin-bottom:20px;
+  box-shadow:var(--shadow)
+}
 
-.col-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
-.col-sub{font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.5}
+/* ── TABS ────────────────────────────────────────────── */
+.tabs{
+  display:flex;gap:3px;
+  background:var(--paper2);border:1.5px solid var(--rule);
+  border-radius:12px;padding:4px;margin-bottom:24px
+}
+.tab{
+  flex:1;padding:10px 12px;border:none;background:transparent;
+  border-radius:9px;font-family:var(--font);font-size:13px;
+  font-weight:600;color:var(--ink3);cursor:pointer;transition:all .18s;text-align:center
+}
+.tab:hover{color:var(--ink2)}
+.tab.active{
+  background:#fff;color:var(--ink);
+  box-shadow:0 1px 4px rgba(28,26,22,.1);border:1.5px solid var(--rule)
+}
+.view{display:none}
+.view.active{display:block}
 
-/* Slider controls */
-.ctrl-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.ctrl-row label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);white-space:nowrap}
-.ctrl-row input[type=range]{flex:1;accent-color:var(--blue);height:5px}
-.ctrl-row .nv{font-family:var(--mono);font-size:18px;font-weight:700;min-width:28px;text-align:right}
+/* ── CONCEPT BANNER ──────────────────────────────────── */
+.concept{
+  background:var(--gold-bg);border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:20px;
+  font-family:var(--serif);font-style:italic;font-size:14px;
+  color:#4a3010;line-height:1.65
+}
+.concept strong{font-style:normal;font-weight:700;color:#3a2008}
 
-/* Canvas wrappers */
-.sq-canvas-wrap{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;
-  padding:14px;display:flex;justify-content:center;align-items:center;
-  min-height:260px;margin-bottom:12px}
-.sq-canvas-wrap canvas{display:block;max-width:100%;max-height:260px}
+/* ── LAYOUT: canvas left, panel right ───────────────── */
+.scene-layout{display:grid;grid-template-columns:1fr 260px;gap:18px;align-items:start}
+@media(max-width:680px){.scene-layout{grid-template-columns:1fr}}
 
-.cube-canvas-wrap{position:relative;background:var(--surface2);border:1.5px solid var(--border);
-  border-radius:10px;height:300px;overflow:hidden;touch-action:none;cursor:grab;margin-bottom:12px}
-.cube-canvas-wrap:active{cursor:grabbing}
-.cube-canvas-wrap canvas{display:block;width:100%!important;height:100%!important}
-.drag-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
-  font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;
-  background:rgba(245,244,240,.85);padding:3px 9px;border-radius:5px;pointer-events:none;white-space:nowrap}
+/* ── CTRL ROW ────────────────────────────────────────── */
+.ctrl{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.ctrl-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);white-space:nowrap}
+.ctrl input[type=range]{flex:1;height:5px;cursor:pointer}
+.ctrl input[type=range].sq-range{accent-color:var(--teal)}
+.ctrl input[type=range].cu-range{accent-color:var(--rust)}
+.ctrl-val{font-family:var(--mono);font-size:20px;font-weight:700;min-width:28px;text-align:right}
+.ctrl-val.sq-val{color:var(--teal)}
+.ctrl-val.cu-val{color:var(--rust)}
 
-/* Stats strip */
-.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.stat-cell{background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;
-  padding:9px 10px;text-align:center}
-.stat-cell .sl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:2px}
-.stat-cell .sv{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--text)}
-.stat-cell.hl .sv{color:var(--blue)}
-.stat-cell.red .sv{color:var(--red)}
-.stat-cell.orange .sv{color:var(--orange)}
-.stat-cell.const .sv{color:var(--green)}
+/* ── LEGEND STRIP ────────────────────────────────────── */
+.legend{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:8px 12px;border-radius:8px;margin-bottom:12px;
+  font-size:12px;color:var(--ink2);
+  background:var(--paper2);border:1.5px solid var(--rule)
+}
+.legend-swatch{width:13px;height:13px;border-radius:3px;flex-shrink:0}
 
-/* Diff table */
-.diff-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:10px}
-.diff-table th{padding:6px 8px;border-bottom:2px solid var(--border);
-  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
-  color:var(--text3);background:var(--surface2);text-align:right}
+/* ── SQUARE CANVAS ───────────────────────────────────── */
+.sq-wrap{
+  background:var(--paper2);border:1.5px solid var(--rule);
+  border-radius:10px;padding:14px;
+  display:flex;justify-content:center;align-items:center;
+  min-height:280px;margin-bottom:14px
+}
+.sq-wrap canvas{display:block;max-width:100%;max-height:280px}
+
+/* ── CUBE CANVAS ─────────────────────────────────────── */
+.cube-wrap{
+  position:relative;background:var(--paper2);border:1.5px solid var(--rule);
+  border-radius:10px;height:320px;overflow:hidden;
+  touch-action:none;margin-bottom:14px
+}
+.cube-wrap canvas{display:block;width:100%!important;height:100%!important;cursor:grab}
+.cube-wrap canvas:active{cursor:grabbing}
+.canvas-hint{
+  position:absolute;bottom:9px;left:50%;transform:translateX(-50%);
+  font-size:10px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;
+  background:rgba(250,248,244,.85);padding:4px 12px;border-radius:20px;
+  pointer-events:none;white-space:nowrap;border:1px solid var(--rule)
+}
+
+/* ── STAT STRIP ──────────────────────────────────────── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
+.stat{background:#fff;border:1.5px solid var(--rule);border-radius:8px;padding:9px 10px;text-align:center}
+.stat .sl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:3px}
+.stat .sv{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--ink)}
+.stat.sq-hi .sv{color:var(--teal)}
+.stat.cu-hi .sv{color:var(--rust)}
+.stat.diff1 .sv{color:#b84a2a}
+.stat.diff-const .sv{color:var(--sage)}
+
+/* ── DIFF TABLE ──────────────────────────────────────── */
+.diff-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}
+.diff-table th{
+  padding:6px 8px;border-bottom:2px solid var(--rule);
+  font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--ink3);background:var(--paper2);text-align:right
+}
 .diff-table th:first-child{text-align:center}
-.diff-table td{padding:5px 8px;border-bottom:1px solid var(--border);
-  font-family:var(--mono);text-align:right;font-size:12px}
-.diff-table td:first-child{text-align:center;font-weight:700;color:var(--text2)}
-.diff-table tr.active-row td{background:#2c5f9e10}
-.diff-table tr.active-row td:first-child{color:var(--blue)}
-.diff-const{font-weight:700;color:var(--green)}
+.diff-table td{
+  padding:5px 8px;border-bottom:1px solid var(--rule);
+  font-family:var(--mono);text-align:right;font-size:12px
+}
+.diff-table td:first-child{text-align:center;font-weight:700;color:var(--ink2)}
+.diff-table tr.hi-row td{background:rgba(29,106,114,.07)}
+.diff-table tr.hi-row-rust td{background:rgba(184,74,42,.07)}
+.diff-table tr.hi-row td:first-child{color:var(--teal);font-weight:700}
+.diff-table tr.hi-row-rust td:first-child{color:var(--rust);font-weight:700}
+.diff-const{font-weight:700;color:var(--sage)}
 
-/* Gnomon / shell legend strip */
-.legend-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;
-  background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;
-  font-size:12px;color:var(--text2);margin-bottom:10px}
-.legend-swatch{width:14px;height:14px;border-radius:3px;flex-shrink:0}
-
-/* Insight */
-.insight{background:#fff8f0;border:1px solid #f0d8c0;border-left:3px solid var(--orange);
-  border-radius:0 8px 8px 0;padding:11px 14px;font-size:13px;color:#6b4400;line-height:1.65}
+/* ── INSIGHT ─────────────────────────────────────────── */
+.insight{
+  background:#fff8f0;border:1px solid #f0d8c0;
+  border-left:3px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:12px 15px;font-size:13px;color:#6b4400;line-height:1.65;margin-top:16px
+}
 .insight strong{color:#4a2e00}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="head">
-    <div class="head-ic">1</div>
-    <div>
-      <div class="lbl">Chapter 1 · A Square and A Cube</div>
-      <div class="title">Successive Differences</div>
+
+  <div class="header">
+    <div class="chapter-badge">
+      <div class="badge-num">1</div>
+      Chapter 1 · A Square and A Cube
     </div>
+    <h1>Successive Differences</h1>
+    <p class="header-sub">Take differences of perfect squares, then differences of those — and watch what becomes constant. Do the same for cubes. The number of steps tells you the dimension.</p>
   </div>
 
   <div class="card">
-    <div class="two-col">
-
-      <!-- ── LEFT: SQUARES ── -->
-      <div>
-        <div class="col-title">Squares — n²</div>
-        <div class="col-sub">Each step adds a new L-shaped <strong>gnomon</strong> around the square. Gnomon sizes are consecutive odd numbers (2n−1). Take differences twice → constant 2.</div>
-
-        <div class="ctrl-row">
-          <label>n =</label>
-          <input type="range" id="sqN" min="1" max="7" value="3">
-          <span class="nv" id="sqNv" style="color:var(--blue)">3</span>
-        </div>
-
-        <div class="legend-strip">
-          <div class="legend-swatch" style="background:#cbd8f0"></div>
-          <span>Previous square (n−1)²</span>
-          <div class="legend-swatch" style="background:var(--blue);margin-left:8px"></div>
-          <span>New gnomon (2n−1 cells)</span>
-        </div>
-
-        <div class="sq-canvas-wrap">
-          <canvas id="sq-canvas" width="240" height="240"></canvas>
-        </div>
-
-        <div class="stats-strip">
-          <div class="stat-cell">
-            <div class="sl">n²</div>
-            <div class="sv hl" id="sq-total" style="color:var(--blue)">9</div>
-          </div>
-          <div class="stat-cell red">
-            <div class="sl">Gnomon (L1 diff)</div>
-            <div class="sv" id="sq-l1">5</div>
-          </div>
-          <div class="stat-cell const">
-            <div class="sl">L2 diff</div>
-            <div class="sv" id="sq-l2">2</div>
-          </div>
-        </div>
-
-        <table class="diff-table" id="sq-table">
-          <thead><tr>
-            <th>n</th><th>n²</th>
-            <th style="color:var(--red)">L1 diff</th>
-            <th style="color:var(--green)">L2 diff</th>
-          </tr></thead>
-          <tbody id="sq-tbody"></tbody>
-        </table>
-      </div>
-
-      <!-- ── RIGHT: CUBES ── -->
-      <div>
-        <div class="col-title">Cubes — n³</div>
-        <div class="col-sub">Each step adds a 3D <strong>shell</strong> of cubes around the outside. Shell sizes are 1, 7, 19, 37… Take differences three times → constant 6 = 3!</div>
-
-        <div class="ctrl-row">
-          <label>n =</label>
-          <input type="range" id="cubeN" min="1" max="5" value="2">
-          <span class="nv" id="cubeNv" style="color:var(--orange)">2</span>
-        </div>
-
-        <div class="legend-strip">
-          <div class="legend-swatch" style="background:#c8d8f0"></div>
-          <span>Previous cube (n−1)³</span>
-          <div class="legend-swatch" style="background:var(--orange);margin-left:8px"></div>
-          <span>New shell (3n²−3n+1 cubes)</span>
-        </div>
-
-        <div class="cube-canvas-wrap" id="cube-wrap">
-          <canvas id="cube-canvas"></canvas>
-          <div class="drag-hint">Drag to rotate</div>
-        </div>
-
-        <div class="stats-strip">
-          <div class="stat-cell">
-            <div class="sl">n³</div>
-            <div class="sv" id="cube-total" style="color:var(--orange)">8</div>
-          </div>
-          <div class="stat-cell red">
-            <div class="sl">Shell (L1 diff)</div>
-            <div class="sv" id="cube-l1">7</div>
-          </div>
-          <div class="stat-cell const">
-            <div class="sl">L3 diff</div>
-            <div class="sv" id="cube-l3">6</div>
-          </div>
-        </div>
-
-        <table class="diff-table">
-          <thead><tr>
-            <th>n</th><th>n³</th>
-            <th style="color:var(--red)">L1</th>
-            <th style="color:var(--orange)">L2</th>
-            <th style="color:var(--green)">L3</th>
-          </tr></thead>
-          <tbody id="cube-tbody"></tbody>
-        </table>
-      </div>
-
+    <div class="tabs">
+      <button class="tab active" data-tab="sq">Squares — n²</button>
+      <button class="tab" data-tab="cu">Cubes — n³</button>
     </div>
 
-    <div class="insight" style="margin-top:8px">
-      <strong>Why 2! and 3! ?</strong> For n<sup>k</sup>, the k-th level differences always equal k! This is because the leading term of n<sup>k</sup> is n<sup>k</sup> itself, and the k-th finite difference of n<sup>k</sup> equals k!. Geometrically: adding a gnomon to a square involves 1D and 2D growth, while adding a shell to a cube involves 1D, 2D, and 3D contributions — each level of geometry adding one more layer of differences.
+    <!-- ══ SQUARES TAB ══════════════════════════════════ -->
+    <div class="view active" id="view-sq">
+      <div class="concept">
+        <strong>Watch the gnomon grow:</strong> Going from (n−1)² to n² adds an L-shaped ring of cells called a <em>gnomon</em>. The gnomon always has 2n−1 cells — the next consecutive odd number. Take the differences of these gnomons and you get a constant: always 2.
+      </div>
+
+      <div class="ctrl">
+        <span class="ctrl-lbl">n =</span>
+        <input type="range" class="sq-range" id="sqN" min="1" max="7" value="3">
+        <span class="ctrl-val sq-val" id="sqNv">3</span>
+      </div>
+
+      <div class="scene-layout">
+        <!-- Canvas + legend -->
+        <div>
+          <div class="legend">
+            <div class="legend-swatch" style="background:#b8cce8"></div>
+            <span>Previous square (n−1)²</span>
+            <div class="legend-swatch" style="background:var(--teal);margin-left:8px"></div>
+            <span>New gnomon — 2n−1 cells</span>
+          </div>
+          <div class="sq-wrap">
+            <canvas id="sq-canvas" width="260" height="260"></canvas>
+          </div>
+          <div class="stats">
+            <div class="stat sq-hi">
+              <div class="sl">n²</div>
+              <div class="sv" id="sq-total">9</div>
+            </div>
+            <div class="stat diff1">
+              <div class="sl">Gnomon (L1)</div>
+              <div class="sv" id="sq-l1">5</div>
+            </div>
+            <div class="stat diff-const">
+              <div class="sl">L2 — constant</div>
+              <div class="sv" id="sq-l2">2</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side panel -->
+        <div>
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:8px">Differences table</div>
+          <table class="diff-table">
+            <thead><tr>
+              <th>n</th>
+              <th>n²</th>
+              <th style="color:var(--rust)">L1 diff</th>
+              <th style="color:var(--sage)">L2 diff</th>
+            </tr></thead>
+            <tbody id="sq-tbody"></tbody>
+          </table>
+          <div class="insight">
+            <strong>L2 is always 2.</strong> The gnomons grow by exactly 2 each time (3→5→7→9…). So the second differences are constant = 2 = 2! Two levels needed because a square is a 2-dimensional shape.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CUBES TAB ════════════════════════════════════ -->
+    <div class="view" id="view-cu">
+      <div class="concept">
+        <strong>Watch the shell form:</strong> Going from (n−1)³ to n³ adds an outer <em>shell</em> of unit cubes — everything on the surface that wasn't there before. Shell sizes are 1, 7, 19, 37… Take differences three times to reach a constant: always 6 = 3!
+      </div>
+
+      <div class="ctrl">
+        <span class="ctrl-lbl">n =</span>
+        <input type="range" class="cu-range" id="cubeN" min="1" max="5" value="2">
+        <span class="ctrl-val cu-val" id="cubeNv">2</span>
+      </div>
+
+      <div class="scene-layout">
+        <!-- Canvas -->
+        <div>
+          <div class="legend">
+            <div class="legend-swatch" style="background:#b8cce8"></div>
+            <span>Previous cube (n−1)³</span>
+            <div class="legend-swatch" style="background:var(--rust);margin-left:8px"></div>
+            <span>New shell — 3n²−3n+1 cubes</span>
+          </div>
+          <div class="cube-wrap" id="cube-wrap">
+            <canvas id="cube-canvas"></canvas>
+            <div class="canvas-hint">Drag to rotate · Scroll to zoom</div>
+          </div>
+          <div class="stats">
+            <div class="stat cu-hi">
+              <div class="sl">n³</div>
+              <div class="sv" id="cube-total">8</div>
+            </div>
+            <div class="stat diff1">
+              <div class="sl">Shell (L1)</div>
+              <div class="sv" id="cube-l1">7</div>
+            </div>
+            <div class="stat diff-const">
+              <div class="sl">L3 — constant</div>
+              <div class="sv" id="cube-l3">6</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side panel -->
+        <div>
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:8px">Differences table</div>
+          <table class="diff-table">
+            <thead><tr>
+              <th>n</th>
+              <th>n³</th>
+              <th style="color:var(--rust)">L1</th>
+              <th style="color:var(--gold)">L2</th>
+              <th style="color:var(--sage)">L3</th>
+            </tr></thead>
+            <tbody id="cube-tbody"></tbody>
+          </table>
+          <div class="insight">
+            <strong>L3 is always 6 = 3!</strong> Three levels of differences are needed because a cube is 3-dimensional. Each level "peels off" one dimension — shell → face-strip → edge, then constant.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight" style="margin-top:4px">
+      <strong>The general rule:</strong> For n<sup>k</sup>, exactly k levels of differences are needed to reach a constant, and that constant is always k! Squares need 2 levels (constant = 2). Cubes need 3 levels (constant = 6). This is because each level of differencing reduces the polynomial degree by 1.
     </div>
   </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// ═══════════════════════════════════════════════════════
-// SQUARE / GNOMON — 2D CANVAS
-// ═══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ══════════════════════════════════════════════════════
+// SQUARES — 2D CANVAS
+// ══════════════════════════════════════════════════════
 const sqCanvas = document.getElementById('sq-canvas');
-const sqCtx = sqCanvas.getContext('2d');
+const sqCtx    = sqCanvas.getContext('2d');
 let sqN = 3;
 
-const SQ_CORE_COLOR = '#c4d4ec';  // light blue for previous square
-const SQ_NEW_COLOR  = '#2c5f9e';  // blue for new gnomon
-const SQ_EDGE_COLOR = '#1a4878';
+const SQ_CORE = '#b8cce8';   // pale blue — previous square cells
+const SQ_NEW  = '#1d6a72';   // teal — new gnomon cells
+const SQ_EDGE = '#124850';   // darker teal for gnomon outline
 
-function drawSquares(){
+function drawSquares() {
   const n = sqN;
-  const maxN = 7;
-  const size = 220;
-  const cell = Math.floor(size / maxN);
-  const totalW = cell * n;
-  const totalH = cell * n;
-  const offX = (sqCanvas.width - totalW) / 2;
-  const offY = (sqCanvas.height - totalH) / 2;
+  const MAX = 7;
+  const SIZE = 240;
+  const cell = Math.floor(SIZE / MAX);
+  const gridW = cell * n;
+  const gridH = cell * n;
+  const offX = (sqCanvas.width  - gridW) / 2;
+  const offY = (sqCanvas.height - gridH) / 2;
 
   sqCtx.clearRect(0, 0, sqCanvas.width, sqCanvas.height);
 
-  for(let row = 0; row < n; row++){
-    for(let col = 0; col < n; col++){
-      // Is this cell in the new gnomon? (rightmost column OR top row)
-      const isNew = (col === n-1 || row === n-1);
+  for (let row = 0; row < n; row++) {
+    for (let col = 0; col < n; col++) {
+      const isNew = col === n - 1 || row === n - 1;
       const x = offX + col * cell;
       const y = offY + row * cell;
 
-      sqCtx.fillStyle = isNew ? SQ_NEW_COLOR : SQ_CORE_COLOR;
-      sqCtx.fillRect(x+1, y+1, cell-2, cell-2);
+      // Fill
+      sqCtx.fillStyle = isNew ? SQ_NEW : SQ_CORE;
+      sqCtx.fillRect(x + 1, y + 1, cell - 2, cell - 2);
 
-      // Edge highlight on new cells
-      if(isNew){
-        sqCtx.strokeStyle = SQ_EDGE_COLOR;
-        sqCtx.lineWidth = 1;
-        sqCtx.strokeRect(x+1.5, y+1.5, cell-3, cell-3);
+      // Outline new cells more prominently
+      if (isNew) {
+        sqCtx.strokeStyle = SQ_EDGE;
+        sqCtx.lineWidth = 1.5;
+        sqCtx.strokeRect(x + 1.5, y + 1.5, cell - 3, cell - 3);
+      } else {
+        sqCtx.strokeStyle = 'rgba(180,200,220,.5)';
+        sqCtx.lineWidth = .5;
+        sqCtx.strokeRect(x + 1, y + 1, cell - 2, cell - 2);
       }
     }
   }
 
-  // Dimension labels
-  sqCtx.fillStyle = '#5a5650';
-  sqCtx.font = `bold 11px DM Mono, monospace`;
+  // Dimension annotation — bottom
+  sqCtx.fillStyle = '#4a4640';
+  sqCtx.font = 'bold 11px DM Mono, monospace';
   sqCtx.textAlign = 'center';
+  sqCtx.fillText(`n = ${n}`, offX + gridW / 2, offY + gridH + 18);
 
-  // Bottom: total width = n
-  sqCtx.fillText(`n = ${n}`, offX + totalW/2, offY + totalH + 18);
-
-  // Left: height
+  // Dimension annotation — left (rotated)
   sqCtx.save();
-  sqCtx.translate(offX - 14, offY + totalH/2);
-  sqCtx.rotate(-Math.PI/2);
+  sqCtx.translate(offX - 16, offY + gridH / 2);
+  sqCtx.rotate(-Math.PI / 2);
   sqCtx.fillText(`n = ${n}`, 0, 0);
   sqCtx.restore();
 
-  // Gnomon size label (top right)
-  if(n > 1){
-    sqCtx.fillStyle = SQ_NEW_COLOR;
-    sqCtx.font = `bold 11px DM Mono, monospace`;
+  // Gnomon label
+  if (n > 1) {
+    sqCtx.fillStyle = SQ_NEW;
+    sqCtx.font = 'bold 11px DM Mono, monospace';
     sqCtx.textAlign = 'right';
-    sqCtx.fillText(`gnomon = 2×${n}−1 = ${2*n-1}`, offX + totalW - 2, offY - 6);
+    sqCtx.fillText(`gnomon = 2×${n}−1 = ${2 * n - 1}`, offX + gridW - 2, offY - 7);
   }
 
-  // Update stats
-  document.getElementById('sqNv').textContent = n;
-  document.getElementById('sq-total').textContent = n*n;
-  document.getElementById('sq-l1').textContent = n > 1 ? (2*n-1) : '—';
-  document.getElementById('sq-l2').textContent = n > 2 ? '2' : '—';
+  // Stats
+  document.getElementById('sqNv').textContent   = n;
+  document.getElementById('sq-total').textContent = n * n;
+  document.getElementById('sq-l1').textContent   = n > 1 ? (2 * n - 1) : '—';
+  document.getElementById('sq-l2').textContent   = n > 2 ? '2' : '—';
+
   updateSqTable(n);
 }
 
-function updateSqTable(activeN){
+function updateSqTable(activeN) {
   const tbody = document.getElementById('sq-tbody');
   tbody.innerHTML = '';
-  const vals = Array.from({length:7}, (_,i) => (i+1)**2);
-  const l1 = vals.map((v,i) => i>0 ? v-vals[i-1] : null);
-  const l2 = l1.map((v,i) => (v!==null&&l1[i-1]!==null) ? v-l1[i-1] : null);
-  for(let i=0;i<7;i++){
-    const n = i+1;
+  const vals = Array.from({length: 7}, (_, i) => (i + 1) ** 2);
+  const l1 = vals.map((v, i) => i > 0 ? v - vals[i - 1] : null);
+  const l2 = l1.map((v, i) => v !== null && l1[i - 1] !== null ? v - l1[i - 1] : null);
+  for (let i = 0; i < 7; i++) {
+    const n = i + 1;
     const tr = document.createElement('tr');
-    if(n === activeN) tr.classList.add('active-row');
+    if (n === activeN) tr.classList.add('hi-row');
     tr.innerHTML = `
       <td>${n}</td>
       <td>${vals[i]}</td>
-      <td style="color:var(--red)">${l1[i]??'—'}</td>
-      <td class="${l2[i]===2?'diff-const':''}" style="color:var(--green)">${l2[i]??'—'}</td>
+      <td style="color:var(--rust)">${l1[i] ?? '—'}</td>
+      <td class="${l2[i] === 2 ? 'diff-const' : ''}">${l2[i] ?? '—'}</td>
     `;
     tbody.appendChild(tr);
   }
@@ -311,157 +450,154 @@ document.getElementById('sqN').addEventListener('input', e => {
 
 drawSquares();
 
-// ═══════════════════════════════════════════════════════
-// CUBE / SHELL — 3D THREE.JS
-// ═══════════════════════════════════════════════════════
-const cubeWrap = document.getElementById('cube-wrap');
+// ══════════════════════════════════════════════════════
+// CUBES — THREE.JS
+// ══════════════════════════════════════════════════════
+const cubeWrap   = document.getElementById('cube-wrap');
 const cubeCanvas = document.getElementById('cube-canvas');
-const W = cubeWrap.clientWidth, H = cubeWrap.clientHeight;
 
-const renderer = new THREE.WebGLRenderer({canvas: cubeCanvas, antialias:true, alpha:true});
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setSize(W, H);
+const renderer = new THREE.WebGLRenderer({canvas: cubeCanvas, antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(cubeWrap.clientWidth, cubeWrap.clientHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf0ede8);
+scene.background = new THREE.Color(0xf3f0ea);
+scene.fog = new THREE.Fog(0xf3f0ea, 30, 70);
 
-const camera = new THREE.PerspectiveCamera(45, W/H, 0.1, 200);
+const camera = new THREE.PerspectiveCamera(44, cubeWrap.clientWidth / cubeWrap.clientHeight, .1, 200);
 
-// Lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.6);
-scene.add(ambient);
-const dir = new THREE.DirectionalLight(0xffffff, 0.85);
-dir.position.set(8,12,8);
-dir.castShadow = true;
-scene.add(dir);
-const fill = new THREE.DirectionalLight(0xc0d0e8, 0.25);
-fill.position.set(-6,-4,-8);
+// Warm lighting
+scene.add(new THREE.AmbientLight(0xfdf4e8, 0.6));
+const sun = new THREE.DirectionalLight(0xfff8f0, 1.0);
+sun.position.set(8, 14, 10); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0xd0e8f0, 0.25);
+fill.position.set(-6, -4, -8);
 scene.add(fill);
 
-// Orbit
-let orbit = {theta: 0.7, phi: 0.65, dist: 12};
-let drag = {active:false, lastX:0, lastY:0};
-
-function updateCamera(){
-  const x = orbit.dist * Math.sin(orbit.phi) * Math.sin(orbit.theta);
-  const y = orbit.dist * Math.cos(orbit.phi);
-  const z = orbit.dist * Math.sin(orbit.phi) * Math.cos(orbit.theta);
-  camera.position.set(x, y, z);
-  camera.lookAt(0,0,0);
+// Orbit — attached to CANVAS, not wrap
+let orb = {th: 0.7, ph: 0.65, d: 12, active: false, lx: 0, ly: 0};
+function positionCam() {
+  camera.position.set(
+    orb.d * Math.sin(orb.ph) * Math.sin(orb.th),
+    orb.d * Math.cos(orb.ph),
+    orb.d * Math.sin(orb.ph) * Math.cos(orb.th)
+  );
+  camera.lookAt(0, 0, 0);
 }
-updateCamera();
+positionCam();
 
-cubeWrap.addEventListener('pointerdown', e => {
-  drag.active=true; drag.lastX=e.clientX; drag.lastY=e.clientY;
-  cubeWrap.setPointerCapture(e.pointerId);
+cubeCanvas.addEventListener('pointerdown', e => {
+  orb.active = true; orb.lx = e.clientX; orb.ly = e.clientY;
+  cubeCanvas.setPointerCapture(e.pointerId);
 });
-cubeWrap.addEventListener('pointermove', e => {
-  if(!drag.active) return;
-  orbit.theta -= (e.clientX - drag.lastX) * 0.013;
-  orbit.phi = Math.max(0.15, Math.min(Math.PI-0.15, orbit.phi + (e.clientY-drag.lastY)*0.013));
-  drag.lastX = e.clientX; drag.lastY = e.clientY;
-  updateCamera();
+cubeCanvas.addEventListener('pointermove', e => {
+  if (!orb.active) return;
+  orb.th -= (e.clientX - orb.lx) * 0.013;
+  orb.ph = Math.max(.12, Math.min(Math.PI - .12, orb.ph + (e.clientY - orb.ly) * 0.013));
+  orb.lx = e.clientX; orb.ly = e.clientY;
+  positionCam();
 });
-cubeWrap.addEventListener('pointerup', () => drag.active=false);
+cubeCanvas.addEventListener('pointerup', () => orb.active = false);
 cubeWrap.addEventListener('wheel', e => {
   e.preventDefault();
-  orbit.dist = Math.max(4, Math.min(30, orbit.dist + e.deltaY*0.02));
-  updateCamera();
-}, {passive:false});
+  orb.d = Math.max(4, Math.min(30, orb.d + e.deltaY * 0.02));
+  positionCam();
+}, {passive: false});
 
-// Resize
 new ResizeObserver(() => {
-  const w=cubeWrap.clientWidth, h=cubeWrap.clientHeight;
-  renderer.setSize(w,h);
-  camera.aspect=w/h;
+  renderer.setSize(cubeWrap.clientWidth, cubeWrap.clientHeight);
+  camera.aspect = cubeWrap.clientWidth / cubeWrap.clientHeight;
   camera.updateProjectionMatrix();
 }).observe(cubeWrap);
 
-const CORE_COLOR  = 0xc4d4ec;   // light blue: inner (n-1)^3 cubes
-const SHELL_COLOR = 0xe08020;   // orange: new shell cubes
-const CORE_EDGE   = 0x8aa8d0;
-const SHELL_EDGE  = 0xb06010;
-
-const edgeGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(0.9,0.9,0.9));
-const cubeGeo = new THREE.BoxGeometry(0.9,0.9,0.9);
-
-function makeCubeCell(color, edgeColor, x,y,z){
-  const mat = new THREE.MeshLambertMaterial({color});
-  const mesh = new THREE.Mesh(cubeGeo, mat);
-  mesh.position.set(x,y,z);
-  mesh.castShadow = true; mesh.receiveShadow = true;
-  const eMat = new THREE.LineBasicMaterial({color: edgeColor, transparent:true, opacity:0.4});
-  mesh.add(new THREE.LineSegments(edgeGeo, eMat));
-  return mesh;
-}
+const CORE_HEX  = 0xb8cce8;   // pale blue — inner (n-1)³ cells
+const SHELL_HEX = 0xb84a2a;   // rust — new shell
 
 let cubeGroup = new THREE.Group();
 scene.add(cubeGroup);
 let cubeN = 2;
 
-function buildCubeDiff(){
-  const n = cubeN;
+function makeCubeCell(hex, edgeHex, x, y, z) {
+  // Each cell gets its own geometry + material (no sharing — required for independent control)
+  const geo  = new THREE.BoxGeometry(0.90, 0.90, 0.90);
+  const mat  = new THREE.MeshLambertMaterial({color: hex});
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.castShadow = mesh.receiveShadow = true;
+  mesh.position.set(x, y, z);
+
+  const eGeo = new THREE.EdgesGeometry(geo);
+  const eMat = new THREE.LineBasicMaterial({color: edgeHex, transparent: true, opacity: 0.35});
+  mesh.add(new THREE.LineSegments(eGeo, eMat));
+  return mesh;
+}
+
+function buildCubeDiff() {
+  // Dispose old geometry / materials before clearing
+  cubeGroup.children.forEach(obj => {
+    obj.traverse(o => {
+      if (o.geometry) o.geometry.dispose();
+      if (o.material) o.material.dispose();
+    });
+  });
   cubeGroup.clear();
 
-  const offset = -(n-1)/2;
+  const n   = cubeN;
+  const off = -(n - 1) / 2;
 
-  // Categorize each cell: is it in the shell (max coord == n-1) or core?
-  for(let x=0;x<n;x++){
-    for(let y=0;y<n;y++){
-      for(let z=0;z<n;z++){
-        const isShell = (x===n-1 || y===n-1 || z===n-1);
-        const color = isShell ? SHELL_COLOR : CORE_COLOR;
-        const edgeCol = isShell ? SHELL_EDGE : CORE_EDGE;
-        // Show core only if n>1
-        if(!isShell && n===1) continue;
-        if(isShell && n===1){
-          // n=1: the single cube is the whole thing (no previous)
+  for (let x = 0; x < n; x++) {
+    for (let y = 0; y < n; y++) {
+      for (let z = 0; z < n; z++) {
+        const isShell = x === n-1 || y === n-1 || z === n-1;
+        if (!isShell && n === 1) continue; // n=1: single cube is whole thing
+
+        const hex    = isShell ? SHELL_HEX : CORE_HEX;
+        const eHex   = isShell ? 0x8a2a10 : 0x7a9ac0;
+        const mesh   = makeCubeCell(hex, eHex, off + x, off + y, off + z);
+
+        // Core cubes are semi-transparent so the shell is visible
+        if (!isShell) {
+          mesh.material.transparent = true;
+          mesh.material.opacity     = 0.45;
+          mesh.material.depthWrite  = false;
         }
-        const m = makeCubeCell(color, edgeCol, offset+x, offset+y, offset+z);
-        // Make core slightly transparent to see the shell
-        if(!isShell){
-          m.material.transparent = true;
-          m.material.opacity = 0.55;
-        }
-        cubeGroup.add(m);
+
+        cubeGroup.add(mesh);
       }
     }
   }
 
-  // Camera distance based on n
-  orbit.dist = n * 3.5 + 6;
-  updateCamera();
+  orb.d = n * 3.5 + 6;
+  positionCam();
 
   // Stats
-  document.getElementById('cubeNv').textContent = n;
-  document.getElementById('cube-total').textContent = n**3;
-  const shell = 3*n*n - 3*n + 1;
-  document.getElementById('cube-l1').textContent = shell;
+  document.getElementById('cubeNv').textContent    = n;
+  document.getElementById('cube-total').textContent = n ** 3;
+  document.getElementById('cube-l1').textContent    = 3*n*n - 3*n + 1;
+  document.getElementById('cube-l3').textContent    = '6';
 
-  // L3 diff is always 6 (for n>=4, but show it for context)
-  document.getElementById('cube-l3').textContent = '6';
   updateCubeTable(n);
 }
 
-function updateCubeTable(activeN){
+function updateCubeTable(activeN) {
   const tbody = document.getElementById('cube-tbody');
   tbody.innerHTML = '';
-  const vals = Array.from({length:5}, (_,i) => (i+1)**3);
-  const l1 = vals.map((v,i) => i>0 ? v-vals[i-1] : null);
-  const l2 = l1.map((v,i) => (v!==null&&l1[i-1]!==null) ? v-l1[i-1] : null);
-  const l3 = l2.map((v,i) => (v!==null&&l2[i-1]!==null) ? v-l2[i-1] : null);
-  for(let i=0;i<5;i++){
-    const n=i+1;
-    const tr=document.createElement('tr');
-    if(n===activeN) tr.classList.add('active-row');
-    tr.innerHTML=`
+  const vals = Array.from({length: 5}, (_, i) => (i + 1) ** 3);
+  const l1 = vals.map((v, i) => i > 0 ? v - vals[i-1] : null);
+  const l2 = l1.map((v, i) => v !== null && l1[i-1] !== null ? v - l1[i-1] : null);
+  const l3 = l2.map((v, i) => v !== null && l2[i-1] !== null ? v - l2[i-1] : null);
+  for (let i = 0; i < 5; i++) {
+    const n = i + 1;
+    const tr = document.createElement('tr');
+    if (n === activeN) tr.classList.add('hi-row-rust');
+    tr.innerHTML = `
       <td>${n}</td>
       <td>${vals[i]}</td>
-      <td style="color:var(--red)">${l1[i]??'—'}</td>
-      <td style="color:var(--orange)">${l2[i]??'—'}</td>
-      <td class="${l3[i]===6?'diff-const':''}" style="color:var(--green)">${l3[i]??'—'}</td>
+      <td style="color:var(--rust)">${l1[i] ?? '—'}</td>
+      <td style="color:var(--gold)">${l2[i] ?? '—'}</td>
+      <td class="${l3[i] === 6 ? 'diff-const' : ''}">${l3[i] ?? '—'}</td>
     `;
     tbody.appendChild(tr);
   }
@@ -475,8 +611,8 @@ document.getElementById('cubeN').addEventListener('input', e => {
 buildCubeDiff();
 
 // Render loop
-(function animate(){
-  requestAnimationFrame(animate);
+(function loop() {
+  requestAnimationFrame(loop);
   renderer.render(scene, camera);
 })();
 </script>
